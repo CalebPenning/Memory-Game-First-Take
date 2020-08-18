@@ -1,5 +1,5 @@
 const gameContainer = document.getElementById("game");
-
+let total = document.getElementById('scoretotal');
 const COLORS = [
   "red",
   "blue",
@@ -74,7 +74,6 @@ function handleCardClick(e) {
     if (guesses.length === 2) {
       if (guesses[0] !== guesses[1]) {
         // Penalize wrong guesses, sets timeout for color reset
-        score--;
         setTimeout(function() {
         const first = document.querySelectorAll(`.${guesses[0]}`);
         const second = document.querySelectorAll(`.${guesses[1]}`);
@@ -92,6 +91,9 @@ function handleCardClick(e) {
         // Empties matching array and resets the click count
         guesses = [];
         count = 0;
+        // Update score
+        score -= 1;
+        total.innerHTML = score;
       }, 1000)
       } else {
         // assigns matching cards the class "match"
@@ -106,7 +108,6 @@ function handleCardClick(e) {
         // Number to check if all cards have been matched
         len += 2;
         // Updates score
-        let total = document.getElementById('scoretotal');
         total.innerHTML = score;
       }
     }
